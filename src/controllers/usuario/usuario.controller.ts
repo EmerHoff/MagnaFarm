@@ -22,4 +22,9 @@ export class UsuarioController {
     async salvar(@Body() body: any) {
         return await this.usuarioS.salvar(body);
     }
+
+    @Post('/login')
+    async login(@Body() body: any) {
+        return await this.usuarioS.login(body);
+    }
 }

@@ -6,7 +6,7 @@
     "password": "postgres",
     "database": "magna_farm",
 
-    "synchronize": true,
+    "synchronize": false,
     "logging": false,
 
     "entities"   : [

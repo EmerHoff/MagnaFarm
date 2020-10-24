@@ -21,27 +21,46 @@ export class UsuarioService {
     async buscar(id: string) {
         const usuario: Usuario = await this.__usuario.findOne(id);
 
-        return { 
-            message: 'Encontrado!',
-            usuario: usuario,
+        if (usuario) {
+            return { 
+                statusCode: 200,
+                message: 'Usuário encontrado!',
+                usuario
+            }
+        } else {
+            return {
+                statusCode: 404,
+                message: 'Usuário não encontrado!'
+            }
         }
     }
 
     async salvar(body: any) {
-        const { login, senha } = body;
+        const { login, senha, confirma_senha, identificador, telefone, nome } = body;
 
         const user = await this.__usuario.findOne({ where: { login }}); 
         
         if (user) {
             return { 
-                message: 'Já cadastrado!',
+                statusCode: 403,
+                message: 'Você já possui um cadastro com esse email!',
                 usuario: user
+            }
+        }
+
+        if (senha !== confirma_senha) {
+            return { 
+                statusCode: 400,
+                message: 'As senhas não coincidem!',
             }
         }
 
         const usuario: Usuario = new Usuario;
         usuario.login = login;
         usuario.senha = senha;
+        usuario.identificador = identificador;
+        usuario.telefone = telefone;
+        usuario.nome = nome;
 
         const response = await this.__usuario.save(usuario);
 
@@ -49,10 +68,37 @@ export class UsuarioService {
             return { 
                 statusCode: 200,
                 message: 'Cadastrado com sucesso!',
-                usuario: usuario,
+                usuario,
             }
         } else {
             throw new HttpException('Erro ao cadastrar usuario', 400);
         } 
+    }
+
+    async login(body: any) {
+        const { login, senha } = body;
+
+        const user = await this.__usuario.findOne({ where: { login }}); 
+        
+        if (!user) {
+            return { 
+                statusCode: 404,
+                message: 'Não foi encontrado um usuário com esse login!',
+            }
+        }
+
+        if (user.senha === senha) {
+            return { 
+                statusCode: 200,
+                message: 'Login realizado com sucesso!',
+                usuario: user
+            }
+        } else {
+            return { 
+                statusCode: 400,
+                message: 'A senha está incorreta!',
+                usuario: user
+            }
+        }
     }
 }
