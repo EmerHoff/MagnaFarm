@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Usuario } from './Usuario';
 
 @Entity('propriedade')
@@ -6,9 +6,9 @@ export class Propriedade {
     @PrimaryGeneratedColumn('increment')
     id: number;
 
-    @OneToOne(() => Usuario)
+    @ManyToOne(() => Usuario)
     @JoinColumn()
-    usuario: Usuario
+    usuario: Usuario;
 
     @Column()
     nome: string;
