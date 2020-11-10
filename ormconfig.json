@@ -5,6 +5,9 @@
     "username": "postgres",
     "password": "postgres",
     "database": "magna_farm",
+    "options": {
+      "useUTC": false
+    },
 
     "synchronize": false,
     "logging": false,

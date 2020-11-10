@@ -8,6 +8,11 @@ export class PropriedadeController {
     
     constructor(private readonly propriedadeS: PropriedadeService) {}
 
+    @Get('/listar')
+    async listarTodas() {
+        return await this.propriedadeS.listarTodas();
+    }
+
     @Get('/listar/:id')
     async listar(@Param('id') id: string) {
         return await this.propriedadeS.listar(id);

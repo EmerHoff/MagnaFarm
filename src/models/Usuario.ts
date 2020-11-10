@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { format } from 'path';
+import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
 
 @Entity('usuario')
 export class Usuario {
@@ -19,4 +20,15 @@ export class Usuario {
 
     @Column()
     nome: string;
+
+    @Column()
+    dh_registro: Date;
+
+    @Column()
+    admin: boolean;
+
+    @BeforeInsert()
+    setDate() {
+        this.dh_registro = new Date();
+    }
 }

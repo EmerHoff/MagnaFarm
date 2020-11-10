@@ -13,6 +13,24 @@ export class PropriedadeService {
         private readonly __propriedade: Repository<Propriedade>
     ) {}
 
+    async listarTodas() {
+
+        const propriedades = await this.__propriedade.find();
+        
+        if (propriedades) {
+            return { 
+                statusCode: 200,
+                message: 'Propriedades encontradas!',
+                propriedades
+            }
+        } else {
+            return {
+                statusCode: 404,
+                message: 'Nenhuma propriedade encontrada!'
+            }
+        }
+    }
+
     async listar(id: string) {
         const user = await this.__usuario.findOne(id);
 

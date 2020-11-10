@@ -36,7 +36,7 @@ export class UsuarioService {
     }
 
     async salvar(body: any) {
-        const { login, senha, confirma_senha, identificador, telefone, nome } = body;
+        const { login, senha, confirma_senha, identificador, telefone, nome, admin } = body;
 
         const user = await this.__usuario.findOne({ where: { login }}); 
         
@@ -61,6 +61,12 @@ export class UsuarioService {
         usuario.identificador = identificador;
         usuario.telefone = telefone;
         usuario.nome = nome;
+
+        if (admin) {
+            usuario.admin = admin;
+        } else {
+            usuario.admin = false;
+        }
 
         const response = await this.__usuario.save(usuario);
 
