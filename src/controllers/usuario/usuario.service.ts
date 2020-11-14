@@ -107,4 +107,50 @@ export class UsuarioService {
             }
         }
     }
+
+    async alterar(id: string, body: any) {
+        const { login, senha, telefone, nome, admin } = body;
+
+        const user = await this.__usuario.findOne(id); 
+        
+        if (!user) {
+            return { 
+                statusCode: 404,
+                message: 'Não foi encontrado um usuário com esse ID!',
+            }
+        }
+
+        if (user.login !== login) {
+            const emailExistente = await this.__usuario.findOne({ where: { login }});
+
+            if (emailExistente) {
+                return { 
+                    statusCode: 400,
+                    message: 'Já existe um usuário com esse email!',
+                }
+            }
+        }
+        user.login = login;
+        user.senha = senha;
+        user.telefone = telefone;
+        user.nome = nome;
+
+        if (admin) {
+            user.admin = admin;
+        } else {
+            user.admin = false;
+        }
+
+        const response = await this.__usuario.save(user);
+
+        if (response) {
+            return { 
+                statusCode: 200,
+                message: 'Salvo com sucesso!',
+                user,
+            }
+        } else {
+            throw new HttpException('Erro ao salvar informações do usuario', 400);
+        } 
+    }
 }

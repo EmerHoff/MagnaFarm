@@ -27,4 +27,9 @@ export class UsuarioController {
     async login(@Body() body: any) {
         return await this.usuarioS.login(body);
     }
+
+    @Put(':id')
+    async alterar(@Param('id') id: string, @Body() body: any) {
+        return await this.usuarioS.alterar(id, body);
+    }
 }
