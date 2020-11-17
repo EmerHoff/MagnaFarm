@@ -107,4 +107,35 @@ export class PropriedadeService {
         } 
     }
 
+    async alterar(id: string, body: any) {
+        const { nome, endereco, comarca, matricula, area } = body;
+
+        const propriedade = await this.__propriedade.findOne(id); 
+        
+        if (!propriedade) {
+            return { 
+                statusCode: 404,
+                message: 'Nenhuma propriedade com esse ID encontrada!',
+            }
+        }
+
+        propriedade.nome = nome;
+        propriedade.endereco = endereco;
+        propriedade.comarca = comarca;
+        propriedade.matricula = matricula;
+        propriedade.area = area;
+
+        const response = await this.__propriedade.save(propriedade);
+
+        if (response) {
+            return { 
+                statusCode: 200,
+                message: 'Salva com sucesso!',
+                propriedade,
+            }
+        } else {
+            throw new HttpException('Erro ao atualizar propriedade', 400);
+        } 
+    }
+
 }

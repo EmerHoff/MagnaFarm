@@ -27,4 +27,9 @@ export class PropriedadeController {
     async salvar(@Body() body: any) {
         return await this.propriedadeS.salvar(body);
     }
+
+    @Put(':id')
+    async alterar(@Param('id') id: string, @Body() body: any) {
+        return await this.propriedadeS.alterar(id, body);
+    }
 }
