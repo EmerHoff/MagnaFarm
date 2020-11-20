@@ -1,3 +1,4 @@
+import { UploadModule } from './controllers/files/upload.module';
 //Packages
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -7,6 +8,7 @@ import { UsuarioModule } from './controllers/usuario/usuario.module';
 import { PropriedadeModule } from './controllers/propriedade/propriedade.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(), UsuarioModule, PropriedadeModule],
+  imports: [
+    UploadModule, TypeOrmModule.forRoot(), UsuarioModule, PropriedadeModule],
 })
-export class AppModule {}
+export class AppModule { }

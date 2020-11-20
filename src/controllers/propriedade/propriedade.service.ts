@@ -137,5 +137,4 @@ export class PropriedadeService {
             throw new HttpException('Erro ao atualizar propriedade', 400);
         } 
     }
-
 }

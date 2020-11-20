@@ -153,4 +153,8 @@ export class UsuarioService {
             throw new HttpException('Erro ao salvar informações do usuario', 400);
         } 
     }
+
+    async upload(body: any) {
+        console.log(body);
+    }
 }

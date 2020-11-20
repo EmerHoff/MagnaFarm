@@ -1,8 +1,11 @@
 //Packages
-import { Controller, Get, Put, Post, Param, Body, Query } from '@nestjs/common';
+import { Controller, Get, Put, Post, Param, Body, Query, UseInterceptors, UploadedFiles, UploadedFile } from '@nestjs/common';
 
 //Services
 import { UsuarioService } from './usuario.service';
+
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
 
 @Controller('usuario')
 export class UsuarioController { 
@@ -32,4 +35,29 @@ export class UsuarioController {
     async alterar(@Param('id') id: string, @Body() body: any) {
         return await this.usuarioS.alterar(id, body);
     }
+
+    @Post('/arquivo')
+    @UseInterceptors(
+        FileInterceptor('file', {
+          storage: diskStorage({
+            destination: './storage',
+            filename: (req, file, callback) => {
+                const name = file.originalname.split('.')[0];
+                const fileExtName = file.originalname;
+                const randomName = Array(4)
+                  .fill(null)
+                  .map(() => Math.round(Math.random() * 16).toString(16))
+                  .join('');
+                callback(null, `${name}-${randomName}${fileExtName}`);
+              },
+          })
+        })
+      )
+      async uploadedFile(@UploadedFile() file) {
+        const response = {
+          originalname: file.originalname,
+          filename: file.filename,
+        };
+        return response;
+      }
 }
