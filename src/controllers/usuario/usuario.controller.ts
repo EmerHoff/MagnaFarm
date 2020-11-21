@@ -4,7 +4,7 @@ import { Controller, Get, Put, Post, Param, Body, Query, UseInterceptors, Upload
 //Services
 import { UsuarioService } from './usuario.service';
 
-import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 
 @Controller('usuario')
