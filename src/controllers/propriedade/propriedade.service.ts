@@ -15,7 +15,9 @@ export class PropriedadeService {
 
     async listarTodas() {
 
-        const propriedades = await this.__propriedade.find();
+        const propriedades = await this.__propriedade.find({
+            relations: ['usuario']
+        });
         
         if (propriedades) {
             return { 
@@ -47,7 +49,8 @@ export class PropriedadeService {
             return { 
                 statusCode: 200,
                 message: 'Propriedades encontradas!',
-                propriedades
+                propriedades,
+                idUsuario: user.id
             }
         } else {
             return {
@@ -58,7 +61,11 @@ export class PropriedadeService {
     }
 
     async buscar(id: string) {
-        const propriedade: Propriedade = await this.__propriedade.findOne(id);
+        //const propriedade: Propriedade = await this.__propriedade.findOne(id);
+        const propriedade: Propriedade = await this.__propriedade.findOne({
+            where: { id: id },
+            relations: ['usuario'],
+          })
 
         if (propriedade) {
             return { 
