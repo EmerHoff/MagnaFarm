@@ -37,6 +37,7 @@ export class CreateSemeaduraTable1606503405641 implements MigrationInterface {
                 {
                     name: 'data_plantio',
                     type: 'date',
+                    isNullable: false,
                 }
             ],
         }));

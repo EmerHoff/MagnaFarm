@@ -1,7 +1,6 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Usuario } from 'src/models/Usuario';
-import { Propriedade } from 'src/models/Propriedade';
 import { Assinatura } from 'src/models/Assinatura';
 import { Repository } from 'typeorm';
 
@@ -123,14 +122,14 @@ export class AssinaturaService {
         } 
     }
 
-    descontarAreaAssinatura(id_usuario: string, area: number) {
+     async descontarAreaAssinatura(id_usuario: number, area: number) {
         const usuario = this.__usuario.findOne(id_usuario);
 
         if (!usuario) {
             throw new HttpException('Erro ao encontrar usuário do proprietário na assinatura!', 400);
         }
 
-        const assinatura = this.__assinatura.findOne({
+        const assinatura = await this.__assinatura.findOne({
             where: { usuario: usuario, atual: true },
             relations: ['usuario']
         });
@@ -146,5 +145,10 @@ export class AssinaturaService {
         }
 
         this.__assinatura.save(assinatura);
+
+        return { 
+            statusCode: 200,
+            message: 'Area descontada com sucesso!'
+        }
     }
 }

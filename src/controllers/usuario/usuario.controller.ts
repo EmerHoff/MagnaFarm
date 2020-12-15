@@ -1,11 +1,13 @@
 //Packages
-import { Controller, Get, Put, Post, Param, Body, Query, UseInterceptors, UploadedFiles, UploadedFile } from '@nestjs/common';
+import { Controller, Get, Put, Post, Param, Body, Query, UseInterceptors, UploadedFiles, UploadedFile, HttpCode, Header, HttpStatus, Res } from '@nestjs/common';
 
 //Services
 import { UsuarioService } from './usuario.service';
 
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
+import { createReadStream } from 'fs';
+import { statSync } from 'fs';
 
 @Controller('usuario')
 export class UsuarioController { 

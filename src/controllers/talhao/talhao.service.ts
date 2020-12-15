@@ -1,6 +1,5 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Usuario } from 'src/models/Usuario';
 import { Propriedade } from 'src/models/Propriedade';
 import { Talhao } from 'src/models/Talhao';
 import { Repository } from 'typeorm';
@@ -8,8 +7,6 @@ import { Repository } from 'typeorm';
 @Injectable()
 export class TalhaoService { 
     constructor(
-        @InjectRepository(Usuario)
-        private readonly __usuario: Repository<Usuario>,
         @InjectRepository(Propriedade)
         private readonly __propriedade: Repository<Propriedade>,
         @InjectRepository(Talhao)

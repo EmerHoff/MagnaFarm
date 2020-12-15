@@ -118,12 +118,19 @@ export class SemeaduraService {
         if (response) {
             //remove da assinatura a quantia de area equivalente
             const usuario = talhao.propriedade.usuario;
-            this.assinaturaS.descontarAreaAssinatura(usuario, talhao.area);
+            const response = await this.assinaturaS.descontarAreaAssinatura(usuario.id, talhao.area);
 
-            return { 
-                statusCode: 200,
-                message: 'Semeadura cadastrada com sucesso!',
-                semeadura,
+            if (response.statusCode === 200) {
+                return { 
+                    statusCode: 200,
+                    message: 'Semeadura cadastrada com sucesso!',
+                    semeadura,
+                }
+            } else {
+                return { 
+                    statusCode: 400,
+                    message: 'Erro ao descontar área da assinatura do proprietário!',
+                }
             }
         } else {
             throw new HttpException('Erro ao cadastrar semeadura', 400);

@@ -7,6 +7,7 @@ export class AddColumnsUsuario1605034210329 implements MigrationInterface {
             new TableColumn({
                 name: 'dh_registro',
                 type: 'date',
+                isNullable: true
             }),
             new TableColumn({
                 name: 'admin',

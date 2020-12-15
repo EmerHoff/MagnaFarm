@@ -37,6 +37,7 @@ export class CreateAssinaturaTable1606501118085 implements MigrationInterface {
                 {
                     name: 'dh_registro',
                     type: 'date',
+                    isNullable: true,
                 }
             ],
         }));
