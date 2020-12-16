@@ -9,4 +9,9 @@ export class UploadController {
     async upload(@Body() body: any) {
         return await this.uploadS.upload(body);
     }
+
+    @Post('/geojson')
+    async buscarGeojson(@Body() body: any) {
+        return await this.uploadS.buscarGeojson(body);
+    }
  }
