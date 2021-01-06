@@ -1,0 +1,2 @@
+data_plantio: 15/11/2020
+ciclo: 180

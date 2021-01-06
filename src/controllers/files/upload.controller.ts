@@ -14,4 +14,14 @@ export class UploadController {
     async buscarGeojson(@Body() body: any) {
         return await this.uploadS.buscarGeojson(body);
     }
+
+    @Post('/geojson/talhoes')
+    async talhoesGeojson(@Body() body: any) {
+        return await this.uploadS.talhoesGeojson(body);
+    }
+
+    @Post('/polyline/talhoes')
+    async polylineGeojson(@Body() body: any) {
+        return await this.uploadS.talhoesPolyline(body);
+    }
  }
