@@ -4,10 +4,6 @@ import { readFile, readFileSync } from 'fs';
 
 @Injectable()
 export class UploadService {
-    async upload(body: any) {
-        console.log(body);
-        //
-    }
 
     async buscarGeojson(body: any) {
         let { caminho } = body;
@@ -134,5 +130,27 @@ export class UploadService {
         });
 
         return talhoes;
+    }
+
+    replaceAll(str: string, needle: string, replacement: string) {
+        return str.split(needle).join(replacement);
+    }
+
+    async informacoesTalhao (body: any) {
+        let { caminho } = body;
+
+        if (!caminho) {
+            return null;
+        }
+
+        caminho = './storage/' + caminho;
+
+        const data = readFileSync(caminho, 'utf8');
+        
+        const formated = this.replaceAll(data.toString(), "'", "\"");
+
+        if (data) {
+            return JSON.parse(formated);
+        }
     }
 }
