@@ -153,4 +153,76 @@ export class UploadService {
             return JSON.parse(formated);
         }
     }
+
+    async sincronizarPropriedades (body: any) {
+        let { caminho } = body;
+
+        if (!caminho) {
+            return null;
+        }
+
+        caminho = './storage/' + caminho;
+
+        const propriedades = [];
+
+        readdirSync(caminho, { withFileTypes: true }).filter(dirent => dirent.isDirectory()).forEach(propDir => {
+            const propName = propDir.name;
+            const arquivos = [];
+            const caminhoPropriedade = caminho + propName + '/';
+
+            readdirSync(caminhoPropriedade, { withFileTypes: true }).filter(dirent => dirent.isFile()).forEach(file => {
+               const data = readFileSync(caminhoPropriedade + file.name, 'utf8');
+
+                arquivos.push({
+                    nome: file.name,
+                    data: data.toString()
+                });
+            });
+
+            propriedades.push({
+                nome: propName,
+                arquivos: arquivos
+            });
+        });
+
+        return {
+            propriedades: propriedades
+        };
+    }
+
+    async sincronizarTalhoes (body: any) {
+        let { caminho } = body;
+
+        if (!caminho) {
+            return null;
+        }
+
+        caminho = './storage/' + caminho;
+
+        const talhoes = [];
+
+        readdirSync(caminho, { withFileTypes: true }).filter(dirent => dirent.isDirectory()).forEach(talhaoDir => {
+            const talhaoDirName = talhaoDir.name;
+            const arquivos = [];
+            const caminhoTalhao = caminho + talhaoDirName + '/';
+
+            readdirSync(caminhoTalhao, { withFileTypes: true }).filter(dirent => dirent.isFile()).forEach(file => {
+               const data = readFileSync(caminhoTalhao + file.name, 'utf8');
+
+                arquivos.push({
+                    nome: file.name,
+                    data: data.toString()
+                });
+            });
+
+            talhoes.push({
+                nome: talhaoDirName,
+                arquivos: arquivos
+            });
+        });
+
+        return {
+            talhoes: talhoes
+        };
+    }
 }

@@ -24,4 +24,14 @@ export class UploadController {
     async informacoesTalhoes(@Body() body: any) {
         return await this.uploadS.informacoesTalhao(body);
     }
+
+    @Post('/sincronizar/propriedades')
+    async sincronizarPropriedades(@Body() body: any) {
+        return await this.uploadS.sincronizarPropriedades(body);
+    }
+    
+    @Post('/sincronizar/talhoes')
+    async sincronizarTalhoes(@Body() body: any) {
+        return await this.uploadS.sincronizarTalhoes(body);
+    }
  }
