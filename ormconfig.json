@@ -9,7 +9,7 @@
      "useUTC": false
    },
 
-   "synchronize": true,
+   "synchronize": false,
    "logging": false,
 
    "entities"   : [
