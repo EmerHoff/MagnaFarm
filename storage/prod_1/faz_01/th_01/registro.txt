@@ -1,2 +1,0 @@
-20201115 = {'cv': 2.5, 'dist': normal, 'ndvi_medio':0.5, 'DAS':10, 'R':0, 'G':125, 'B':235}
-20201120 = {'cv': 3.4, 'dist': normal, 'ndvi_medio':0.6}

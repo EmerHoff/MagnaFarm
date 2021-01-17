@@ -1,1 +1,0 @@
-{'user_code': 4, 'farm_code': '2', 'field_code': 14, 'farm_name': 'Talhão 14', 'area_ha': '63,66'}

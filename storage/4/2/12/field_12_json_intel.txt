@@ -1,0 +1,1 @@
+{'user_code': 4, 'farm_code': '2', 'field_code': 12, 'farm_name': 'Talhão 12', 'area_ha': '136,85', 'longitude_centroid': '-54.8152671851339', 'latitude_centroid': '-15.4358214174729'}
