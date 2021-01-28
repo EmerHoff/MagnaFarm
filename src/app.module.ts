@@ -1,3 +1,4 @@
+import { TiposemeaduraModule } from './controllers/tipoSemeadura/tiposemeadura.module';
 //Packages
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -12,6 +13,7 @@ import { UploadModule } from './controllers/files/upload.module';
 
 @Module({
   imports: [
+    TiposemeaduraModule,
     TypeOrmModule.forRoot(),
     AssinaturaModule,
     SemeaduraModule,
