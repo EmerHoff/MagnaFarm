@@ -27,4 +27,24 @@ export class TiposemeaduraService {
             }
         }
     }
+
+    async salvar(body: any) {
+        const { cultivo, ciclo } = body;
+
+        const semeadura: TipoSemeadura = new TipoSemeadura;
+        semeadura.cultivo = cultivo;
+        semeadura.ciclo = ciclo;
+
+        const response = await this.__tiposemeadura.save(semeadura);
+
+        if (response) {
+            return { 
+                statusCode: 200,
+                message: 'Tipo de semeadura cadastrada com sucesso!',
+                semeadura,
+            }
+        } else {
+            throw new HttpException('Erro ao cadastrar tipo de semeadura', 400);
+        } 
+    }
 }
