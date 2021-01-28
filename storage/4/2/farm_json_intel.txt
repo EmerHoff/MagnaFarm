@@ -1,1 +1,0 @@
-{'user_code': 4, 'farm_code': '2', 'field_code': 0, 'farm_name': 'Fazenda Caverá', 'field_number': 17, 'longitude_centroid': '-54.8203906307313', 'latitude_centroid': '-15.4334980708352'}
