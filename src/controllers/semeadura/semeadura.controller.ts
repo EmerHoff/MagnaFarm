@@ -24,4 +24,9 @@ export class SemeaduraController {
     async salvar(@Body() body: any) {
         return await this.semeaduraS.salvar(body);
     }
+
+    @Post('/declarar')
+    async salvarSemeadura(@Body() body: any) {
+        return await this.semeaduraS.salvarSemeadura(body);
+    }
 }

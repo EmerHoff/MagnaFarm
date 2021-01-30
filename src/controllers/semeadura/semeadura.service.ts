@@ -4,6 +4,11 @@ import { Talhao } from 'src/models/Talhao';
 import { Semeadura } from 'src/models/Semeadura';
 import { Repository } from 'typeorm';
 import { AssinaturaService } from '../assinatura/assinatura.service'
+import { readFile, readFileSync } from 'fs';
+import { writeFile } from 'fs';
+import { writeFileSync } from 'fs';
+import { existsSync } from 'fs';
+import { appendFileSync } from 'fs';
 
 @Injectable()
 export class SemeaduraService { 
@@ -78,6 +83,36 @@ export class SemeaduraService {
                 statusCode: 404,
                 message: 'Semeadura não encontrada!'
             }
+        }
+    }
+
+    async salvarSemeadura(body: any) {
+        const { id_propriedade, id_usuario, id_talhao, dataPlantio, variedade, cultura, ciclo } = body;
+
+        const dataFormated = dataPlantio.split("-")[2] + '-' + dataPlantio.split("-")[1] + '-' + dataPlantio.split("-")[0];
+
+        const content = '{\'sowing_date\': \'' + dataFormated + '\', \'cycle\': ' + ciclo + ', \'crop\': \'' + cultura + '\', \'variedade\': \'' + variedade + '\'}';
+
+        const caminho = './storage/' + id_usuario + '/' +  id_propriedade + '/' + id_talhao + '/sowing_event.txt';
+
+        if (existsSync(caminho)) {
+            //file exists
+            appendFileSync(caminho, '\r\n' + content);
+        } else {
+            writeFile(caminho, content, function (err) {
+                if (err) {
+                    return { 
+                        statusCode: 400,
+                        message: 'Erro ao salvar semeadura!'
+                    }
+                }
+            });
+        }
+
+        return { 
+            statusCode: 200,
+            message: 'Semeadura salva!',
+            textData: content
         }
     }
 
