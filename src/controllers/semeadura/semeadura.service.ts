@@ -97,7 +97,7 @@ export class SemeaduraService {
 
         if (existsSync(caminho)) {
             //file exists
-            appendFileSync(caminho, '\r\n' + content);
+            appendFileSync(caminho, ',\r\n' + content);
         } else {
             writeFile(caminho, content, function (err) {
                 if (err) {
