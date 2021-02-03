@@ -1,27 +1,27 @@
 {
-   "type": "postgres",
-   "host": "localhost",
-   "port": 5432,
-   "username": "postgres",
-   "password": "postgres",
-   "database": "magna_farm",
-   "options": {
-     "useUTC": false
-   },
+    "type": "postgres",
+    "host": "ec2-54-172-219-218.compute-1.amazonaws.com",
+    "port": 5432,
+    "username": "taoaahelzbbcoc",
+    "password": "673356dd40c90cca02c84f258c7899148c6424f08522fffd8c92e6f19ecae817",
+    "database": "dfg3mr15a6g9vp",
+    "options": {
+      "useUTC": false
+    },
 
-   "synchronize": false,
-   "logging": false,
+    "synchronize": true,
+    "logging": false,
 
-   "entities"   : [
-     "dist/models/*.js"
-  ],
-  "migrations" : [
-     "dist/migration/**/*.js"
-  ],
-  "subscribers": [
-     "dist/subscriber/**/*.js"
-  ],
-   "cli": {
-       "migrationsDir": "src/database/migrations"
-   }
-}
+    "entities"   : [
+      "dist/models/*.js"
+   ],
+   "migrations" : [
+      "dist/migration/**/*.js"
+   ],
+   "subscribers": [
+      "dist/subscriber/**/*.js"
+   ],
+    "cli": {
+        "migrationsDir": "src/database/migrations"
+    }
+ }
