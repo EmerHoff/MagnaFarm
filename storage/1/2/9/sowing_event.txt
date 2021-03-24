@@ -1,0 +1,2 @@
+{'sowing_date': '30-01-2021', 'cycle': 150, 'crop': 'Algodão', 'variedade': 'AG223'}
+{'sowing_date': '2021-01-30', 'cycle': 220, 'crop': 'Algodão', 'variedade': 'ALGO'}

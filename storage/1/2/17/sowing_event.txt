@@ -1,0 +1,1 @@
+{'sowing_date': '2021-01-13', 'cycle': 200, 'crop': 'Milho', 'variedade': 'MI559'}

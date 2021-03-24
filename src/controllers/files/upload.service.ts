@@ -225,4 +225,46 @@ export class UploadService {
             talhoes: talhoes
         };
     }
+
+    async buscarNDVI (body: any) {
+        const { caminho, dateNDVI } = body;
+
+        if (!caminho) {
+            return null;
+        }
+
+        if (!dateNDVI) {
+            return null;
+        }
+        const caminhoNDVI = './storage/' + caminho + dateNDVI + '/temp/workspace/';
+
+        //NDVI
+        const dataNDVI = readFileSync(caminhoNDVI + '0001_NDVI.png', 'base64');
+
+        return { 
+            nome: '0001_NDVI.png',
+            data: dataNDVI.toString()
+        };
+    }
+
+    async buscarRGB (body: any) {
+        const { caminho, dateNDVI } = body;
+
+        if (!caminho) {
+            return null;
+        }
+
+        if (!dateNDVI) {
+            return null;
+        }
+        const caminhoNDVI = './storage/' + caminho + dateNDVI + '/temp/workspace/';
+
+        //RGB
+        const dataRGB = readFileSync(caminhoNDVI + '0001_RGB.png', 'base64');
+
+        return { 
+            nome: '0001_RGB.png',
+            data: dataRGB.toString()
+        };
+    }
 }

@@ -34,4 +34,14 @@ export class UploadController {
     async sincronizarTalhoes(@Body() body: any) {
         return await this.uploadS.sincronizarTalhoes(body);
     }
+
+    @Post('/buscar/ndvi')
+    async buscarNDVI(@Body() body: any) {
+        return await this.uploadS.buscarNDVI(body);
+    }
+
+    @Post('/buscar/rgb')
+    async buscarRGB(@Body() body: any) {
+        return await this.uploadS.buscarRGB(body);
+    }
  }

@@ -1,0 +1,2 @@
+{'sowing_date': '2020-01-13', 'cycle': 180, 'crop': 'algodão'},
+{'sowing_date': '2021-01-13', 'cycle': 200, 'crop': 'Milho', 'variedade': 'KT-232'}

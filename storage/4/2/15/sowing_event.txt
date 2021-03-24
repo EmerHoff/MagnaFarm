@@ -1,2 +1,0 @@
-{'sowing_date': '2021-01-15', 'cycle': 200, 'crop': 'Milho', 'variedade': 'MI-2344'},
-{'sowing_date': '2021-02-03', 'cycle': 200, 'crop': 'Milho', 'variedade': 'HH22'}

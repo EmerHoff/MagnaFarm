@@ -1,2 +1,0 @@
-{'sowing_date': '2020-01-15', 'cycle': 180, 'crop': 'algodão'}
-{'sowing_date': '2021-01-15', 'cycle': 150, 'crop': 'soja'}

@@ -1,0 +1,1 @@
+{'sowing_date': '2021-02-08', 'cycle': 180, 'crop': 'Soja', 'variedade': 'NN45'}
