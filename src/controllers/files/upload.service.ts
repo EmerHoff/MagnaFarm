@@ -1,9 +1,13 @@
 import { Injectable } from '@nestjs/common';
+import { existsSync } from 'fs';
 import { readdirSync } from 'fs';
 import { readFile, readFileSync } from 'fs';
 
 @Injectable()
 export class UploadService {
+
+    //Caminho onde buscará os arquivos das propriedades/talhoes
+    caminhoStorage = './storage/';
 
     async buscarGeojson(body: any) {
         let { caminho } = body;
@@ -12,7 +16,11 @@ export class UploadService {
             return null;
         }
 
-        caminho = './storage/' + caminho;
+        caminho = this.caminhoStorage + caminho;
+
+        if (! existsSync(caminho)) {
+            return null;
+        }
 
         const data = readFileSync(caminho, 'utf8');
         
@@ -54,12 +62,21 @@ export class UploadService {
             return null;
         }
 
-        caminho = './storage/' + caminho;
+        caminho = this.caminhoStorage + caminho;
+
+        if (! existsSync(caminho)) {
+            return null;
+        }
 
         const talhoes = [];
 
         readdirSync(caminho, { withFileTypes: true }).filter(dirent => dirent.isDirectory()).forEach(file => {
             const caminhoTalhao = caminho + file.name + '/field_' + file.name + '_json.txt';
+
+            if (! existsSync(caminhoTalhao)) {
+                return null;
+            }
+
             const data = readFileSync(caminhoTalhao, 'utf8');
 
             if (data) {
@@ -101,13 +118,22 @@ export class UploadService {
             return null;
         }
 
-        caminho = './storage/' + caminho;
+        caminho = this.caminhoStorage + caminho;
+
+        if (! existsSync(caminho)) {
+            return null;
+        }
 
         const talhoes = [];
 
         readdirSync(caminho, { withFileTypes: true }).filter(dirent => dirent.isDirectory()).forEach(file => {
             const fileName = file.name;
             const caminhoTalhao = caminho + fileName + '/field_' + fileName + '_json.txt';
+
+            if (! existsSync(caminhoTalhao)) {
+                return null;
+            }
+
             const data = readFileSync(caminhoTalhao, 'utf8');
 
             if (data) {
@@ -143,7 +169,11 @@ export class UploadService {
             return null;
         }
 
-        caminho = './storage/' + caminho;
+        caminho = this.caminhoStorage + caminho;
+
+        if (! existsSync(caminho)) {
+            return null;
+        }
 
         const data = readFileSync(caminho, 'utf8');
         
@@ -161,7 +191,11 @@ export class UploadService {
             return null;
         }
 
-        caminho = './storage/' + caminho;
+        caminho = this.caminhoStorage + caminho;
+
+        if (! existsSync(caminho)) {
+            return null;
+        }
 
         const propriedades = [];
 
@@ -169,6 +203,10 @@ export class UploadService {
             const propName = propDir.name;
             const arquivos = [];
             const caminhoPropriedade = caminho + propName + '/';
+
+            if (! existsSync(caminhoPropriedade)) {
+                return null;
+            }
 
             readdirSync(caminhoPropriedade, { withFileTypes: true }).filter(dirent => dirent.isFile()).forEach(file => {
                const data = readFileSync(caminhoPropriedade + file.name, 'utf8');
@@ -197,7 +235,11 @@ export class UploadService {
             return null;
         }
 
-        caminho = './storage/' + caminho;
+        caminho = this.caminhoStorage + caminho;
+
+        if (! existsSync(caminho)) {
+            return null;
+        }
 
         const talhoes = [];
 
@@ -205,6 +247,10 @@ export class UploadService {
             const talhaoDirName = talhaoDir.name;
             const arquivos = [];
             const caminhoTalhao = caminho + talhaoDirName + '/';
+
+            if (! existsSync(caminhoTalhao)) {
+                return null;
+            }
 
             readdirSync(caminhoTalhao, { withFileTypes: true }).filter(dirent => dirent.isFile()).forEach(file => {
                const data = readFileSync(caminhoTalhao + file.name, 'utf8');
@@ -236,7 +282,11 @@ export class UploadService {
         if (!dateNDVI) {
             return null;
         }
-        const caminhoNDVI = './storage/' + caminho + dateNDVI + '/temp/workspace/';
+        const caminhoNDVI = this.caminhoStorage + caminho + dateNDVI + '/temp/workspace/';
+
+        if (! existsSync(caminhoNDVI)) {
+            return null;
+        }
 
         //NDVI
         const dataNDVI = readFileSync(caminhoNDVI + '0001_NDVI.png', 'base64');
@@ -257,7 +307,11 @@ export class UploadService {
         if (!dateNDVI) {
             return null;
         }
-        const caminhoNDVI = './storage/' + caminho + dateNDVI + '/temp/workspace/';
+        const caminhoNDVI = this.caminhoStorage + caminho + dateNDVI + '/temp/workspace/';
+
+        if (! existsSync(caminhoNDVI)) {
+            return null;
+        }
 
         //RGB
         const dataRGB = readFileSync(caminhoNDVI + '0001_RGB.png', 'base64');
